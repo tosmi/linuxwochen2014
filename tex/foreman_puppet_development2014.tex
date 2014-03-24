@@ -35,7 +35,7 @@ frame=single,
 captionpos=b
 }
 
-\title{System Automation mit Foreman und Puppet\\}
+\title{System Automation mit Puppet und Foreman\\}
 \author{Toni Schmidbauer}
 
 \begin{document}
@@ -47,10 +47,20 @@ captionpos=b
 \end{frame}
 
 \begin{frame}
+  \frametitle{whoami}
+  \begin{itemize}
+  \item SysAdmin@s-itsolutions
+  \item toni@stderr.at
+  \item http://github.com/tosmi
+  \item stderr@jabber.org
+  \end{itemize}
+\end{frame}
+\begin{frame}
 
   \frametitle{Agenda}
 
   \begin{itemize}
+  \item Kurze Umfrage
   \item Was ist Puppet?
   \item Was ist Foreman?
   \item Puppet@s-iTSolutions
@@ -61,21 +71,66 @@ captionpos=b
 \end{frame}
 
 \begin{frame}
+\center{\huge{Umfrage}}
+\end{frame}
+
+\begin{frame}[fragile]
   \frametitle{Was ist Puppet?}
 
+  \begin{lstlisting}
+    class mypuppetconfig {
 
+      user { 'linuxwochen':
+        ensure => present,
+        uid => 4711,
+        gid => 4711,
+      }
+
+      package { 'emacs':
+        ensure => installed
+      } ->
+      package { 'vi':
+        ensure => absent,
+      }
+
+    }
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Zuordnung von Klassen}
+
+  \begin{lstlisting}
+    node linuxwochen {
+      include mypuppetconfig
+    }
+  \end{lstlisting}
+
+  \begin{itemize}
+  \item oder über einen External Node Classifier (Foreman)
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Foreman Dashboard}
+  \frametitle{Was ist Foreman?}
   \begin{figure}[ht]
     \centering
     \framebox{
-      \includegraphics[height=5.5cm,width=8cm]{../pics/foreman_dashboard.png}
+      \includegraphics[height=7.5cm,width=10cm]{../pics/foreman_dashboard.png}
     }
-    \caption{Foreman Dashboard}
     \label{fig:stack}
   \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Und jetzt?}
+
+  \begin{itemize}
+  \item Wie verwaltet wir unseren Puppet code?
+  \item Wie organisieren wir Module?
+  \item Wie erfolgt das Deployment des Codes?
+  \item Was ist mit Unittests?
+  \end{itemize}
 \end{frame}
 
 
