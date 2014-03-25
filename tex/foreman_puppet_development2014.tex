@@ -63,9 +63,10 @@ captionpos=b
   \item Kurze Umfrage
   \item Was ist Puppet?
   \item Was ist Foreman?
-  \item Puppet@s-iTSolutions
   \item Modul Entwicklung
+  \item Puppet@s-iTSolutions
   \item Deployment Prozess
+  \item Was haben wir geplant
   \end{itemize}
 
 \end{frame}
@@ -122,17 +123,138 @@ captionpos=b
 \end{frame}
 
 \begin{frame}
-  \frametitle{Und jetzt?}
+  \center{\huge{Und jetzt?}}
+\end{frame}
 
+\begin{frame}
+  \begin{figure}[ht]
+    \centering
+      \includegraphics[height=7.5cm,width=10cm]{../pics/chucky.png}
+    \label{fig:stack}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}
   \begin{itemize}
-  \item Wie verwaltet wir unseren Puppet Code?cm
+  \item Wie verwaltet wir unseren Puppet Code?
   \item Wie organisieren wir Module?
   \item Wie soll eine Entwicklungsumgebung aussehen?
+  \item Wie testen wir den Puppet Code?
   \item Ein Repository für alle Module?
   \item Pro Modul ein Repository?
   \item Wie verwalten wir Module von PuppetForge?
   \item Wie erfolgt das Deployment des Codes?
-  \item Was ist mit Unittests?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \center{\huge{Wie verwaltet wir unseren Puppet Code?}}
+  \center{\huge{Wie organisieren wir Module?}}
+\end{frame}
+
+\begin{frame}
+  \frametitle{GIT}
+
+  \begin{itemize}
+  \item Ein zentrales GIT Repository
+  \item Berechtigungssystem für GIT mit gitolite
+  \item 3 Hauptbranches
+    \begin{itemize}
+    \item Master: Staging via GIT pull auf 4 Dev Server
+    \item Testing: ca. 25 ``Produktions'' Server (git pull)
+    \item Production: der Rest, Staging via tags
+    \end{itemize}
+  \item Feature Branches für neue Module
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \center{\huge{Demo}}
+\end{frame}
+
+\begin{frame}
+  \center{\huge{Wie soll eine Entwicklungsumgebung aussehen?}}
+\end{frame}
+
+\begin{frame}
+  \begin{figure}[ht]
+    \centering
+      \includegraphics[height=7.5cm,width=10cm]{../pics/vagrant.png}
+    \label{fig:stack}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Vagrant}
+
+  \begin{itemize}
+  \item \url{http://vagrantup.com}
+  \item Ermöglicht virtuelle Entwicklungsumgebungen
+  \item Vagrant Box ist ein vorkonfiguriertes Image
+  \item Default VirtualBox andere Provider via Plugins (VMWare, KVM)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \center{\huge{Demo}}
+\end{frame}
+
+\begin{frame}
+  \center{\huge{Wie testen wir den Puppet Code?}}
+\end{frame}
+
+\begin{frame}
+  \frametitle{rspec-puppet}
+
+  \begin{itemize}
+  \item Ruby RSpec Tests für Puppet
+  \item Ist in unserer Vagrant Umgebung vorinstalliert
+  \item Jedes Module muss RSpec Tests mitbringen
+  \item Commit in Master Branch löst einen Jenkins Build aus
+  \item Commit in Testing Branch löst einen Jenkins Build aus
+  \item Commit in Production Branch löst einen Jenkins Build aus
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \begin{itemize}
+  \item Wie verwaltet wir unseren Puppet Code? \emph{\color{green}DONE}
+  \item Wie organisieren wir Module? \emph{\color{green}DONE}
+  \item Wie soll eine Entwicklungsumgebung aussehen? \emph{\color{green}DONE}
+  \item Wie testen wir den Puppet Code? \emph{\color{green}DONE}
+  \item Wie verwalten wir Module von PuppetForge?
+  \item Wie erfolgt das Deployment des Codes?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{figure}[ht]
+    \centering
+      \includegraphics[height=7.5cm,width=10cm]{../pics/puppy.png}
+    \label{fig:stack}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Probleme, Probleme, Probleme...}
+
+  \begin{itemize}
+  \item Ein GIT Repo funktioniert nicht bei Änderungen von Upstream Modulen
+  \item Andere Abteilungen sollen ihre Module unabhänging Testen
+  \item Unittests sagen noch nichts aus wie sie der Code am Live-System verhält
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Was haben wir geplant?}
+
+  \begin{itemize}
+  \item r10k für Deployment
+  \item Ein Repository pro Module
+  \item Acceptance Tests mit Beaker
   \end{itemize}
 \end{frame}
 
