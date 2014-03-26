@@ -63,9 +63,7 @@ captionpos=b
   \item Kurze Umfrage
   \item Was ist Puppet?
   \item Was ist Foreman?
-  \item Modul Entwicklung
   \item Puppet@s-iTSolutions
-  \item Deployment Prozess
   \item Was haben wir geplant
   \end{itemize}
 
@@ -79,7 +77,7 @@ captionpos=b
   \frametitle{Was ist Puppet?}
 
   \begin{lstlisting}
-    class mypuppetconfig {
+    class linuxwochen2014 {
 
       user { 'linuxwochen':
         ensure => present,
@@ -96,6 +94,7 @@ captionpos=b
     }
   \end{lstlisting}
 \end{frame}
+
 
 \begin{frame}[fragile]
   \frametitle{Zuordnung von Klassen}
@@ -116,8 +115,17 @@ captionpos=b
   \begin{figure}[ht]
     \centering
     \framebox{
-      \includegraphics[height=7.5cm,width=10cm]{../pics/foreman_dashboard.png}
+      \includegraphics[height=7.5cm,width=10.3cm]{../pics/foreman_dashboard.png}
     }
+    \label{fig:stack}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Puppet run}
+  \begin{figure}[ht]
+    \centering
+      \includegraphics[height=6.5cm,width=11cm]{../pics/puppet_overview}
     \label{fig:stack}
   \end{figure}
 \end{frame}
@@ -138,13 +146,12 @@ captionpos=b
 \begin{frame}
   \begin{itemize}
   \item Wie verwaltet wir unseren Puppet Code?
+  \item Wie soll unsere Puppet Umgebung aussehen?
+  \item Wie erfolgt das Deployment des Codes?
   \item Wie organisieren wir Module?
   \item Wie soll eine Entwicklungsumgebung aussehen?
   \item Wie testen wir den Puppet Code?
-  \item Ein Repository für alle Module?
-  \item Pro Modul ein Repository?
   \item Wie verwalten wir Module von PuppetForge?
-  \item Wie erfolgt das Deployment des Codes?
   \end{itemize}
 \end{frame}
 
@@ -171,6 +178,31 @@ captionpos=b
 
 \begin{frame}
   \center{\huge{Demo}}
+\end{frame}
+
+\begin{frame}
+  \center{\huge{Wie soll unsere Puppet Umgebung aussehen?}}
+  \center{\huge{Wie erfolgt das Deployment des Codes?}}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Puppet Umgebung}
+  \begin{figure}[ht]
+    \centering
+      \includegraphics[height=7.2cm,width=11.5cm]{../pics/puppet_deployment}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Puppet Umgebung II}
+
+  \begin{itemize}
+  \item Am Development Master verwenden wir dynamische Puppet Environments \\
+    \tiny{\url{http://puppetlabs.com/blog/git-workflow-and-puppet-environments}}
+    \normalsize
+  \item Jeder Feature Branch wird ein eigenes Puppet Environment
+  \item Das Staging in die Produktion erfolgt über GIT tags
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -217,15 +249,29 @@ captionpos=b
   \end{itemize}
 \end{frame}
 
+\begin{frame}
+  \center{\huge{Wie verwalten wir Module von PuppetForge?}}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Puppetforge Module}
+
+  \begin{itemize}
+  \item Eigenes GIT Repository (puppetforge.git)
+  \item Download der Module in der Enwicklungsumgebung
+  \item Staging wie unser Haupt Puppet Repository
+  \end{itemize}
+\end{frame}
 
 \begin{frame}
   \begin{itemize}
   \item Wie verwaltet wir unseren Puppet Code? \emph{\color{green}DONE}
+  \item Wie soll unsere Puppet Umgebung aussehen?  \emph{\color{green}DONE}
+  \item Wie erfolgt das Deployment des Codes? \emph{\color{green}DONE}
   \item Wie organisieren wir Module? \emph{\color{green}DONE}
   \item Wie soll eine Entwicklungsumgebung aussehen? \emph{\color{green}DONE}
   \item Wie testen wir den Puppet Code? \emph{\color{green}DONE}
-  \item Wie verwalten wir Module von PuppetForge?
-  \item Wie erfolgt das Deployment des Codes?
+  \item Wie verwalten wir Module von PuppetForge? \emph{\color{green}DONE}
   \end{itemize}
 \end{frame}
 
@@ -237,14 +283,14 @@ captionpos=b
   \end{figure}
 \end{frame}
 
-
 \begin{frame}
   \frametitle{Probleme, Probleme, Probleme...}
 
   \begin{itemize}
   \item Ein GIT Repo funktioniert nicht bei Änderungen von Upstream Modulen
   \item Andere Abteilungen sollen ihre Module unabhänging Testen
-  \item Unittests sagen noch nichts aus wie sie der Code am Live-System verhält
+  \item Unittests sagen noch nichts aus wie sich der Code am Live-System verhält
+  \item Wir sollten eigentlich das Zusammenspiel aller Modele testen (Forge und eigene)
   \end{itemize}
 \end{frame}
 
@@ -254,6 +300,7 @@ captionpos=b
   \begin{itemize}
   \item r10k für Deployment
   \item Ein Repository pro Module
+  \item Puppet coverage tests
   \item Acceptance Tests mit Beaker
   \end{itemize}
 \end{frame}
