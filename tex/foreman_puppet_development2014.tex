@@ -77,10 +77,14 @@ captionpos=b
   \frametitle{Was ist Puppet?}
 
   \begin{lstlisting}
-    class linuxwochen2014 {
+    class linuxwochen2014 (
+      $ensure = present
+    )
+
+    {
 
       user { 'linuxwochen':
-        ensure => present,
+        ensure => $ensure,
         uid => 4711,
         gid => 4711,
       }
@@ -103,7 +107,9 @@ captionpos=b
     \item über manifests/site.pp
       \begin{lstlisting}
         node linuxwochen {
-          include mypuppetconfig
+          class { 'mypuppetconfig':
+            ensure => absent
+          }
         }
       \end{lstlisting}
   \item über einen External Node Classifier (Foreman)
@@ -136,13 +142,13 @@ captionpos=b
   \center{\huge{Und jetzt?}}
 \end{frame}
 
-% \begin{frame}
-%   \begin{figure}[ht]
-%     \centering
-%       \includegraphics[height=7.5cm,width=10cm]{../pics/chucky.png}
-%     \label{fig:stack}
-%   \end{figure}
-% \end{frame}
+\begin{frame}
+  \begin{figure}[ht]
+    \centering
+      \includegraphics[height=7.5cm,width=10cm]{../pics/chucky.png}
+    \label{fig:stack}
+  \end{figure}
+\end{frame}
 
 
 \begin{frame}
@@ -203,7 +209,7 @@ captionpos=b
     \tiny{\url{http://puppetlabs.com/blog/git-workflow-and-puppet-environments}}
     \normalsize
   \item Jeder Feature Branch wird ein eigenes Puppet Environment
-  \item Das Staging in die Produktion erfolgt über GIT tags
+  \item Das Staging in Produktion/Testing erfolgt über GIT tags
   \end{itemize}
 \end{frame}
 
@@ -229,13 +235,13 @@ captionpos=b
   \center{\huge{Wie soll eine Entwicklungsumgebung aussehen?}}
 \end{frame}
 
-% \begin{frame}
-%   \begin{figure}[ht]
-%     \centering
-%       \includegraphics[height=7.5cm,width=10cm]{../pics/vagrant.png}
-%     \label{fig:stack}
-%   \end{figure}
-% \end{frame}
+\begin{frame}
+  \begin{figure}[ht]
+    \centering
+      \includegraphics[height=7.5cm,width=10cm]{../pics/vagrant.png}
+    \label{fig:stack}
+  \end{figure}
+\end{frame}
 
 \begin{frame}
   \frametitle{Vagrant}
@@ -328,3 +334,9 @@ captionpos=b
 
 
 \end{document}
+
+todo
+
+kann puppet ueber proxy kommunizieren?
+external resources...
+vagrant beispiel
