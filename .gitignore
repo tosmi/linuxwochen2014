@@ -1,0 +1,11 @@
+/tex/auto/*.el
+/.vagrant/
+/tex/foreman_puppet_development2014.aux
+/tex/foreman_puppet_development2014.dvi
+/tex/foreman_puppet_development2014.log
+/tex/foreman_puppet_development2014.nav
+/tex/foreman_puppet_development2014.out
+/tex/foreman_puppet_development2014.snm
+/tex/foreman_puppet_development2014.toc
+/tex/foreman_puppet_development2014.vrb
+/pics/*.fig.bak
