@@ -4,7 +4,7 @@ class linuxwochen2014 (
   user { 'toni':
     ensure => $ensure,
     uid    => 4711,
-    gid    => 4711,
+    gid    => 100,
   }
 
   package { 'emacs-nox':
