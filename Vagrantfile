@@ -1,17 +1,12 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# vagrant test boxes for the linuxwochen2014 presentation
-# you just have to change the uri for the boxes to download
-
 Vagrant.configure("2") do |config|
 
   config.vm.define "master", primary: true do |master|
     master.vm.box = "vagrant-sl64-puppet"
     master.vm.hostname = 'master'
-
-    # you need to change this!
-    master.vm.box_url = "http://infra.oss.lan.at/vagrant/vagrant-sl64-puppet.box"
+    master.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/centos-65-x64-virtualbox-puppet.box"
     master.vm.network "private_network", ip: "192.168.1.2", virtualbox__intnet: true
 
     master.vm.provision :puppet do |puppet|
@@ -24,9 +19,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "sl6agent" do |sl6client|
     sl6client.vm.box = "vagrant-sl64-puppet"
     sl6client.vm.hostname = 'sl6agent'
-
-    # you need to change this!
-    sl6client.vm.box_url = "http://infra.oss.lan.at/vagrant/vagrant-sl64-puppet.box"
+    master.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/centos-65-x64-virtualbox-puppet.box"
     sl6client.vm.network :private_network, ip: "192.168.1.3", virtualbox__intnet: true
 
     sl6client.vm.provision :puppet do |puppet|
