@@ -76,17 +76,21 @@ captionpos=b
 \begin{frame}[fragile]
   \frametitle{Was ist Puppet?}
 
+  \begin{itemize}
+  \item Declarative programming: telling the machine what you would
+    like to happen, and let the computer figure out how to do it.
+  \item \tiny{Imperative programming: telling the achine how to do
+    something}
+  \end{itemize}
+
   \begin{lstlisting}
     class linuxwochen2014 (
       $ensure = present
-    )
-
-    {
-
-      user { 'linuxwochen':
+    ) {
+      user { 'toni':
         ensure => $ensure,
-        uid => 4711,
-        gid => 4711,
+        uid    => 4711,
+        gid    => 4711,
       }
 
       package { 'emacs':
@@ -106,8 +110,8 @@ captionpos=b
   \begin{itemize}
     \item über manifests/site.pp
       \begin{lstlisting}
-        node linuxwochen.at {
-          class { 'linuxwochen2014:
+        node node /^(foo|bar)\.linuxwochen\.at$/ {
+          class { 'linuxwochen2014':
             ensure => absent
           }
         }
@@ -142,13 +146,13 @@ captionpos=b
   \center{\huge{Und jetzt?}}
 \end{frame}
 
-% \begin{frame}
-%   \begin{figure}[ht]
-%     \centering
-%       \includegraphics[height=7.5cm,width=10cm]{../pics/chucky.png}
-%     \label{fig:stack}
-%   \end{figure}
-% \end{frame}
+\begin{frame}
+  \begin{figure}[ht]
+    \centering
+      \includegraphics[height=7.5cm,width=10cm]{../pics/chucky.png}
+    \label{fig:stack}
+  \end{figure}
+\end{frame}
 
 
 \begin{frame}
@@ -173,14 +177,14 @@ captionpos=b
 
   \begin{itemize}
   \item Ein zentrales GIT Repository
-  \item Berechtigungssystem für GIT mit gitolite
+  \item Berechtigungssystem mit Gitolite
+  \item Feature Branches für neue Module
   \item 3 Hauptbranches
     \begin{itemize}
     \item Master: Staging via GIT pull auf 4 Dev Server
     \item Testing: ca. 25 ``Produktions'' Server (git pull)
     \item Production: der Rest, Staging via tags
     \end{itemize}
-  \item Feature Branches für neue Module
   \end{itemize}
 \end{frame}
 
@@ -197,27 +201,15 @@ captionpos=b
   \frametitle{Puppet Umgebung}
   \begin{figure}[ht]
     \centering
-      \includegraphics[height=7.2cm,width=11.5cm]{../pics/puppet_deployment}
+      \includegraphics[height=5.5cm,width=11cm]{../pics/puppet_deployment2}
   \end{figure}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Puppet Umgebung II}
-
-  \begin{itemize}
-  \item Am Development Master verwenden wir dynamische Puppet Environments \\
-    \tiny{\url{http://puppetlabs.com/blog/git-workflow-and-puppet-environments}}
-    \normalsize
-  \item Jeder Feature Branch wird ein eigenes Puppet Environment
-  \item Das Staging in Produktion/Testing erfolgt über GIT tags
-  \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Deployment}
   \begin{figure}[ht]
     \centering
-      \includegraphics[height=5.5cm,width=11cm]{../pics/jenkins_pipeline.png}
+      \includegraphics[height=3.8cm,width=11cm]{../pics/jenkins_pipeline}
     \label{fig:stack}
   \end{figure}
 \end{frame}
@@ -226,7 +218,7 @@ captionpos=b
   \frametitle{Monitoring}
   \begin{figure}[ht]
     \centering
-      \includegraphics[height=7cm,width=11cm]{../pics/jenkins_monitor.png}
+      \includegraphics[height=6cm,width=11cm]{../pics/jenkins_monitor.png}
     \label{fig:stack}
   \end{figure}
 \end{frame}
@@ -262,17 +254,41 @@ captionpos=b
   \center{\huge{Wie testen wir den Puppet Code?}}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{rspec-puppet}
 
   \begin{itemize}
   \item Ruby RSpec Tests für Puppet
-  \item Ist in unserer Vagrant Umgebung vorinstalliert
   \item Jedes Module muss RSpec Tests mitbringen
-  \item Commit in Master Branch löst einen Jenkins Build aus
-  \item Commit in Testing Branch löst einen Jenkins Build aus
-  \item Commit in Production Branch löst einen Jenkins Build aus
   \end{itemize}
+
+  \begin{lstlisting}
+require 'spec_helper'
+describe 'linuxwochen2014' do
+  let :facts { { :osfamily => 'RedHat' } }
+
+  context 'ensure is set to absent' do
+    let :params { { :ensure => 'absent'} }
+
+    it do
+      should contain_user('toni').with({
+                                         'ensure' => 'absent',
+                                         'uid'    => '4711',
+                                         'gid'    => '4711',
+                                      })
+    end
+
+    it { should contain_package('emacs').with_ensure('installed') }
+    it { should contain_package(vi).with_ensure('absent') }
+    it { should contain_package(vi).that_requires('Package[emacs]') }
+  end
+end
+  \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}
+  \center{\huge{Demo}}
 \end{frame}
 
 \begin{frame}
@@ -285,7 +301,7 @@ captionpos=b
   \begin{itemize}
   \item Eigenes GIT Repository (puppetforge.git)
   \item Download der Module in der Enwicklungsumgebung
-  \item Staging wie unser Haupt Puppet Repository
+  \item Staging GIT pull (baeh!)
   \item Dies ändert sich allerdings (dazu später)
   \end{itemize}
 \end{frame}
@@ -325,18 +341,17 @@ captionpos=b
   \frametitle{Was haben wir geplant?}
 
   \begin{itemize}
-  \item r10k für Deployment
+  \item r10k für Deployment (\url{https://github.com/adrienthebo/r10k})
   \item Ein Repository pro Module
   \item Nur interne Module bleiben im Hauptrepo
   \item Acceptance Tests mit Beaker
   \end{itemize}
 \end{frame}
 
-
 \end{document}
 
 todo
 
-kann puppet ueber proxy kommunizieren?
-external resources...
+kann puppet ueber proxy kommunizieren? ja
+exported resources...
 vagrant beispiel
