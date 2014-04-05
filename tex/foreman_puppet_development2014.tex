@@ -96,7 +96,7 @@ captionpos=b
       package { 'emacs-nox':
         ensure => installed
       } ->
-      package { 'vi':
+      package { 'vim-enhanced':
         ensure => absent,
       }
     }
@@ -157,19 +157,77 @@ captionpos=b
 
 \begin{frame}
   \begin{itemize}
+  \item Wie soll eine Entwicklungsumgebung aussehen?
+  \item Wie testen wir den Puppet Code?
   \item Wie verwalten wir unseren Puppet Code?
   \item Wie soll unsere Puppet Umgebung aussehen?
   \item Wie erfolgt das Deployment des Codes?
-  \item Wie organisieren wir Module?
-  \item Wie soll eine Entwicklungsumgebung aussehen?
-  \item Wie testen wir den Puppet Code?
   \item Wie verwalten wir Module von PuppetForge?
   \end{itemize}
 \end{frame}
 
 \begin{frame}
+  \center{\huge{Wie soll eine Entwicklungsumgebung aussehen?}}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Vagrant}
+
+  \begin{itemize}
+  \item \url{http://vagrantup.com}
+  \item Ermöglicht virtuelle Entwicklungsumgebungen
+  \item Vagrant Box ist ein vorkonfiguriertes Image
+  \item Default VirtualBox andere Provider via Plugins (VMWare, KVM)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \center{\huge{Demo}}
+\end{frame}
+
+\begin{frame}
+  \center{\huge{Wie testen wir den Puppet Code?}}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{rspec-puppet}
+
+  \begin{itemize}
+  \item Ruby RSpec Tests für Puppet
+  \item Jedes Module muss RSpec Tests mitbringen
+  \end{itemize}
+
+  \begin{lstlisting}
+require 'spec_helper'
+describe 'linuxwochen2014' do
+  let :facts { { :osfamily => 'RedHat' } }
+
+  context 'ensure is set to absent' do
+    let :params { { :ensure => 'absent'} }
+
+    it do
+      should contain_user('toni').with({
+                                         'ensure' => 'absent',
+                                         'uid'    => '4711',
+                                         'gid'    => '100',
+                                      })
+    end
+
+    it { should contain_package('emacs-nox').with_ensure('installed') }
+    it { should contain_package('vim-enhanced').with_ensure('absent') }
+    it { should contain_package('emacs-nox).that_comes_before('Package[vim-enhanced]') }
+  end
+end
+  \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}
+  \center{\huge{Demo}}
+\end{frame}
+
+\begin{frame}
   \center{\huge{Wie verwalten wir unseren Puppet Code?}}
-  \center{\huge{Wie organisieren wir Module?}}
 \end{frame}
 
 \begin{frame}
@@ -223,73 +281,6 @@ captionpos=b
   \end{figure}
 \end{frame}
 
-\begin{frame}
-  \center{\huge{Wie soll eine Entwicklungsumgebung aussehen?}}
-\end{frame}
-
-% \begin{frame}
-%   \begin{figure}[ht]
-%     \centering
-%       \includegraphics[height=7.5cm,width=10cm]{../pics/vagrant.png}
-%     \label{fig:stack}
-%   \end{figure}
-% \end{frame}
-
-\begin{frame}
-  \frametitle{Vagrant}
-
-  \begin{itemize}
-  \item \url{http://vagrantup.com}
-  \item Ermöglicht virtuelle Entwicklungsumgebungen
-  \item Vagrant Box ist ein vorkonfiguriertes Image
-  \item Default VirtualBox andere Provider via Plugins (VMWare, KVM)
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \center{\huge{Demo}}
-\end{frame}
-
-\begin{frame}
-  \center{\huge{Wie testen wir den Puppet Code?}}
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{rspec-puppet}
-
-  \begin{itemize}
-  \item Ruby RSpec Tests für Puppet
-  \item Jedes Module muss RSpec Tests mitbringen
-  \end{itemize}
-
-  \begin{lstlisting}
-require 'spec_helper'
-describe 'linuxwochen2014' do
-  let :facts { { :osfamily => 'RedHat' } }
-
-  context 'ensure is set to absent' do
-    let :params { { :ensure => 'absent'} }
-
-    it do
-      should contain_user('toni').with({
-                                         'ensure' => 'absent',
-                                         'uid'    => '4711',
-                                         'gid'    => '100',
-                                      })
-    end
-
-    it { should contain_package('emacs-nox').with_ensure('installed') }
-    it { should contain_package('vi').with_ensure('absent') }
-    it { should contain_package('emacs-nox).that_comes_before('Package[vi]') }
-  end
-end
-  \end{lstlisting}
-
-\end{frame}
-
-\begin{frame}
-  \center{\huge{Demo}}
-\end{frame}
 
 \begin{frame}
   \center{\huge{Wie verwalten wir Module von PuppetForge?}}
@@ -301,19 +292,18 @@ end
   \begin{itemize}
   \item Eigenes GIT Repository (puppetforge.git)
   \item Download der Module in der Enwicklungsumgebung
-  \item Staging GIT pull (baeh!)
+  \item Staging GIT pull (bäh!)
   \item Dies ändert sich allerdings (dazu später)
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \begin{itemize}
+  \item Wie soll eine Entwicklungsumgebung aussehen? \emph{\color{green}DONE}
+  \item Wie testen wir den Puppet Code? \emph{\color{green}DONE}
   \item Wie verwalten wir unseren Puppet Code? \emph{\color{green}DONE}
   \item Wie soll unsere Puppet Umgebung aussehen?  \emph{\color{green}DONE}
   \item Wie erfolgt das Deployment des Codes? \emph{\color{green}DONE}
-  \item Wie organisieren wir Module? \emph{\color{green}DONE}
-  \item Wie soll eine Entwicklungsumgebung aussehen? \emph{\color{green}DONE}
-  \item Wie testen wir den Puppet Code? \emph{\color{green}DONE}
   \item Wie verwalten wir Module von PuppetForge? \emph{\color{green}DONE}
   \end{itemize}
 \end{frame}

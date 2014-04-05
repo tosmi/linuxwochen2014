@@ -14,7 +14,7 @@ describe 'linuxwochen2014' do
     end
 
     it { should contain_package('emacs-nox').with_ensure('installed') }
-    it { should contain_package('vi').with_ensure('absent') }
-    it { should contain_package('emacs-nox').that_comes_before('Package[vi]') }
+    it { should contain_package('vim-enhanced').with_ensure('absent') }
+    it { should contain_package('emacs-nox').that_comes_before('Package[vim-enhanced]') }
   end
 end
