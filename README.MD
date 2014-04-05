@@ -1,15 +1,18 @@
-title
+Title
+=====
 
 System Automation mit Puppet und Foreman
 
 
-abstract
+Abstract
+========
 
 Wir werden in unserem Vortrag den Aufbau einer Puppet/Foreman Umgebung
 mit bis zu 1000 Clients beschreiben. Es geht vorallem um die
 Entwicklung, das Testen und das Deployment von Puppet Modulen.
 
-details
+Details
+=======
 
 Wir haben in den vergangen 1 1/2 Jahren eine Puppet Umgebung mit ca.
 1000 Clients aufgebaut. Der Einstieg in Puppet war relativ einfach, da
