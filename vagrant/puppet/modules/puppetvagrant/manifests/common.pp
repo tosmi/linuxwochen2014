@@ -62,24 +62,6 @@ class common (
     require  => File['gemrc'],
   }
 
-  # install puppet forge modules
-  #
-  exec { 'puppetforge':
-    command => 'git clone http://git.eb.lan.at/cgit/puppet-forge.git forge',
-    cwd     => '/etc/puppet',
-    creates => '/etc/puppet/forge',
-    path    => ['/usr/bin', '/opt/csw/bin', ],
-    require => Package['git'],
-  }
-
-  exec { 'hieradata':
-    command => 'git clone http://git.eb.lan.at/cgit/hieradata.git hieradata',
-    cwd     => '/etc/puppet',
-    creates => '/etc/puppet/hieradata',
-    path    => ['/usr/bin', '/opt/csw/bin', ],
-    require => Package['git'],
-  }
-
   # copy files
   #
   file { 'vagrantbashrc':
@@ -126,7 +108,7 @@ class common (
 
   file { '/etc/puppet/modules':
     ensure => 'link',
-    target => '/vagrant/fixtures/modules',
+    target => '/vagrant/modules',
     force  => true,
   }
 

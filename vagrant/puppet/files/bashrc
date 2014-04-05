@@ -8,8 +8,4 @@ fi
 PATH=/opt/csw/bin:/opt/csw/sbin:/usr/sfw/bin:/usr/sfw/sbin:/opt/puppet/bin:/home/vagrant/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 export PATH
 
-http_proxy=http://proxy-sd2.s-mxs.net:8080/
-https_proxy=http://proxy-sd2.s-mxs.net:8080/
-export http_proxy https_proxy
-
 # User specific aliases and functions

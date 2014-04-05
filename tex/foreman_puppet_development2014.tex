@@ -93,7 +93,7 @@ captionpos=b
         gid    => 4711,
       }
 
-      package { 'emacs':
+      package { 'emacs-nox':
         ensure => installed
       } ->
       package { 'vi':
@@ -278,7 +278,7 @@ describe 'linuxwochen2014' do
                                       })
     end
 
-    it { should contain_package('emacs').with_ensure('installed') }
+    it { should contain_package('emacs-nox').with_ensure('installed') }
     it { should contain_package(vi).with_ensure('absent') }
     it { should contain_package(vi).that_requires('Package[emacs]') }
   end

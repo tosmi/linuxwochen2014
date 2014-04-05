@@ -45,38 +45,18 @@ class rhel {
   #
   package { 'git':
     ensure  => 'latest',
-    require => Augeas['yum.conf'],
   }
 
   package { 'vim-enhanced':
     ensure  => 'latest',
-    require => Augeas['yum.conf'],
   }
 
   package { 'puppet':
-    ensure   => '3.2.4-1.el6',
-    require => Augeas['yum.conf']
+    ensure   => 'latest',
   }
 
   package { 'hiera':
-    ensure  => '1.3.2-1.el6',
-    require => Augeas['yum.conf']
-  }
-
-  # change various config files
-  #
-  augeas { 'yum.conf':
-    changes => [
-                'set /files/etc/yum.conf/main/proxy http://proxy-sd2.s-mxs.net:8080',
-                ],
-  }
-
-  augeas { 'sudoers':
-    context => '/files/etc/sudoers',
-    changes => [
-                'set */env_keep[var="SSH_AUTH_SOCK"]/var[. = "https_proxy"] https_proxy',
-                'set */env_keep[var="SSH_AUTH_SOCK"]/var[. = "http_proxy"] http_proxy',
-                ],
+    ensure  => 'latest',
   }
 
   augeas { 'puppetconf':

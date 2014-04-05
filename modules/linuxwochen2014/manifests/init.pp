@@ -7,7 +7,7 @@ class linuxwochen2014 (
     gid    => 4711,
   }
 
-  package { 'emacs':
+  package { 'emacs-nox':
     ensure => installed
   } ->
   package { 'vi':
