@@ -28,19 +28,4 @@ Vagrant.configure("2") do |config|
       puppet.module_path = "vagrant/puppet/modules"
     end
   end
-
-  config.vm.define "sol10agent" do |sol10|
-    sol10.vm.box = "vagrant-sol10-puppet"
-    sol10.vm.hostname = 'sol10agent'
-
-    # you need to change this!
-    sol10.vm.box_url = "http://infra.oss.lan.at/vagrant/vagrant-sol10-puppet.box"
-    sol10.vm.network :private_network, ip: "192.168.1.4", virtualbox__intnet: true
-
-    sol10.vm.provision :puppet do |puppet|
-      puppet.manifest_file  = "agent.pp"
-      puppet.manifests_path = "vagrant/puppet/manifests"
-      puppet.module_path = "vagrant/puppet/modules"
-    end
-  end
 end
