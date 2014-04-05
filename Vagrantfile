@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "sl6agent" do |sl6client|
     sl6client.vm.box = "puppetlabs-centos6"
     sl6client.vm.hostname = 'sl6agent'
-    master.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/centos-65-x64-virtualbox-puppet.box"
+    sl6client.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/centos-65-x64-virtualbox-puppet.box"
     sl6client.vm.network :private_network, ip: "192.168.1.3", virtualbox__intnet: true
 
     sl6client.vm.provision :puppet do |puppet|
