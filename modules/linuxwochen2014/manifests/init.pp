@@ -10,7 +10,7 @@ class linuxwochen2014 (
   package { 'emacs-nox':
     ensure => installed
   } ->
-  package { 'vi':
+  package { 'vim-enhanced':
     ensure => absent,
   }
 }
