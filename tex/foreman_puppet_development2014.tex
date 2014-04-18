@@ -239,10 +239,11 @@ end
   \item Feature Branches für neue Module
   \item 3 Hauptbranches
     \begin{itemize}
-    \item Master: Staging via GIT pull auf 4 Dev Server
-    \item Testing: ca. 25 ``Produktions'' Server (git pull)
-    \item Production: der Rest, Staging via tags
+    \item Master
+    \item Testing
+    \item Production
     \end{itemize}
+  \item Feature Branches für neue Module
   \end{itemize}
 \end{frame}
 
@@ -256,11 +257,34 @@ end
 \end{frame}
 
 \begin{frame}
-  \frametitle{Puppet Umgebung}
+  \frametitle{Puppet Umgebung und Deployment}
   \begin{figure}[ht]
     \centering
       \includegraphics[height=5.5cm,width=11cm]{../pics/puppet_deployment2}
   \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Umgebungen}
+
+    \begin{itemize}
+    \item Master
+      \begin{itemize}
+      \item Test auf 7 Entwicklungs Server
+      \item Push auf Remote Master Branch löst Deployment aus
+      \item Linux/Solaris {sparc,i386} {10,11}/AIX
+      \end{itemize}
+    \item Testing
+      \begin{itemize}
+      \item ca. 30 ``Produktions'' Server
+      \item Annotated Tags werden automatisch deployed (test\_*)
+      \end{itemize}
+    \item Production
+      \begin{itemize}
+      \item ca 1000 Hosts
+      \item Annotated Tags werden automatisch deployed (prod\_*)
+      \end{itemize}
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -308,13 +332,13 @@ end
   \end{itemize}
 \end{frame}
 
-% \begin{frame}
-%   \begin{figure}[ht]
-%     \centering
-%       \includegraphics[height=6cm,width=10cm]{../pics/puppy.png}
-%     \label{fig:stack}
-%   \end{figure}
-% \end{frame}
+\begin{frame}
+  \begin{figure}[ht]
+    \centering
+      \includegraphics[height=6cm,width=10cm]{../pics/puppy.png}
+    \label{fig:stack}
+  \end{figure}
+\end{frame}
 
 \begin{frame}
   \frametitle{Probleme, Probleme, Probleme...}

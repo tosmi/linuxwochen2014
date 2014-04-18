@@ -52,7 +52,7 @@ class rhel {
   }
 
   package { 'puppet':
-    ensure   => 'latest',
+    ensure   => '3.4.3-1.el6',
   }
 
   package { 'hiera':
