@@ -9,7 +9,7 @@ describe 'linuxwochen2014' do
       should contain_user('toni').with({
                                          'ensure' => 'absent',
                                          'uid'    => '4711',
-                                         'gid'    => '4711',
+                                         'gid'    => '100',
                                       })
     end
 
