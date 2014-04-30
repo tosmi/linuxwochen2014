@@ -236,14 +236,14 @@ end
 
   \begin{itemize}
   \item Ein zentrales GIT Repository
-  \item Berechtigungssystem mit Gitolite
-  \item Feature Branches für neue Module
   \item 3 Hauptbranches
     \begin{itemize}
     \item Master
     \item Testing
     \item Production
     \end{itemize}
+  \item Feature Branches für neue Module
+  \item Berechtigungssystem mit Gitolite
   \end{itemize}
 \end{frame}
 
@@ -260,9 +260,9 @@ end
   \frametitle{Umgebungen}
 
     \begin{itemize}
-    \item Master
+    \item Development (Master)
       \begin{itemize}
-      \item Test auf 7 Entwicklungs Server
+      \item Test auf 7 Entwicklungsserver
       \item Push auf Remote Master Branch löst Deployment aus
       \item RedHat 5,6 / Solaris {sparc,i386} {10,11} / AIX
       \end{itemize}
@@ -315,7 +315,7 @@ end
 
   \begin{itemize}
   \item Eigenes GIT Repository (puppetforge.git)
-  \item Download der Module in der Enwicklungsumgebung
+  \item Download der Module in der Enwicklungsumgebung via \\ \texttt{puppet module install ...}
   \item Staging GIT pull (bäh!)
   \item Dies ändert sich allerdings (dazu später)
   \end{itemize}
