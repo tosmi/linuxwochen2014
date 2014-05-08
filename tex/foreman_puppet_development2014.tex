@@ -51,7 +51,8 @@ captionpos=b
   \begin{itemize}
   \item SysAdmin@s-itsolutions
   \item toni@stderr.at
-  \item http://github.com/tosmi
+  \item \url{http://stderr.at}
+  \item \url{http://github.com/tosmi}
   \item stderr@jabber.org
   \end{itemize}
 \end{frame}
@@ -79,7 +80,7 @@ captionpos=b
   \begin{itemize}
   \item Declarative programming: telling the machine what you would
     like to happen, and let the computer figure out how to do it.
-  \item \tiny{Imperative programming: telling the achine how to do
+  \item \tiny{Imperative programming: telling the machine how to do
     something}
   \end{itemize}
 
@@ -110,7 +111,7 @@ captionpos=b
   \begin{itemize}
     \item über manifests/site.pp
       \begin{lstlisting}
-        node node /^(foo|bar)\.linuxwochen\.at$/ {
+        node /^(foo|bar)\.linuxwochen\.at$/ {
           class { 'linuxwochen2014':
             ensure => absent
           }
@@ -235,8 +236,6 @@ end
 
   \begin{itemize}
   \item Ein zentrales GIT Repository
-  \item Berechtigungssystem mit Gitolite
-  \item Feature Branches für neue Module
   \item 3 Hauptbranches
     \begin{itemize}
     \item Master
@@ -244,6 +243,7 @@ end
     \item Production
     \end{itemize}
   \item Feature Branches für neue Module
+  \item Berechtigungssystem mit Gitolite
   \end{itemize}
 \end{frame}
 
@@ -257,22 +257,14 @@ end
 \end{frame}
 
 \begin{frame}
-  \frametitle{Puppet Umgebung und Deployment}
-  \begin{figure}[ht]
-    \centering
-      \includegraphics[height=5.5cm,width=11cm]{../pics/puppet_deployment2}
-  \end{figure}
-\end{frame}
-
-\begin{frame}
   \frametitle{Umgebungen}
 
     \begin{itemize}
-    \item Master
+    \item Development (Master)
       \begin{itemize}
-      \item Test auf 7 Entwicklungs Server
+      \item Test auf 7 Entwicklungsserver
       \item Push auf Remote Master Branch löst Deployment aus
-      \item Linux/Solaris {sparc,i386} {10,11}/AIX
+      \item RedHat 5,6 / Solaris {sparc,i386} {10,11} / AIX
       \end{itemize}
     \item Testing
       \begin{itemize}
@@ -285,6 +277,14 @@ end
       \item Annotated Tags werden automatisch deployed (prod\_*)
       \end{itemize}
     \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Puppet Umgebung und Deployment}
+  \begin{figure}[ht]
+    \centering
+      \includegraphics[height=5.5cm,width=11cm]{../pics/puppet_deployment2}
+  \end{figure}
 \end{frame}
 
 \begin{frame}
@@ -315,7 +315,7 @@ end
 
   \begin{itemize}
   \item Eigenes GIT Repository (puppetforge.git)
-  \item Download der Module in der Enwicklungsumgebung
+  \item Download der Module in der Enwicklungsumgebung via \\ \texttt{puppet module install ...}
   \item Staging GIT pull (bäh!)
   \item Dies ändert sich allerdings (dazu später)
   \end{itemize}
@@ -362,7 +362,35 @@ end
   \end{itemize}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Links und Bücher}
+\tiny
+  \begin{itemize}
+  \item \url{http://github.com/tosmi/linuxwochen2014}
+  \item \url{http://github.com/tosmi/puppet-devel}
+  \item Puppet Learning VM: \url{http://puppetlabs.com/download-learning-vm}
+  \item Foreman: \url{http://theforeman.org}
+  \item Vagrant: \url{http://vagrantup.com}
+  \item rspec-puppet: \url{http://rspec-puppet.com/}
+  \item puppet-lint: \url{http://puppet-lint.com/}
+  \item Gitolite: \url {http://gitolite.com/}
+  \item r10k: \url{https://github.com/adrienthebo/r10k}
+  \item Roles and Profiles: \url{http://www.craigdunn.org/2012/05/239/}
+  \item Dynamische Puppet Umgebungen: \url{http://puppetlabs.com/blog/git-workflow-and-puppet-environments}
+  \item puppet-sync: \url{https://github.com/pdxcat/puppet-sync}
+  \item \texttt{Instant Puppet 3 Starter}
+  \item \texttt{Pro Puppet 2nd}
+  \item \texttt{The RSpec Book}
+  \item \texttt{Pulling Strings with Puppet}
+  \item \texttt{Continuous Delivery}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \huge{Danke für die Aufmerksamkeit}
+\end{frame}
 \end{document}
+
 
 todo
 
