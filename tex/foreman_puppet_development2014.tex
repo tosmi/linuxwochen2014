@@ -122,14 +122,20 @@ captionpos=b
   \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Puppet Environments}
+  \begin{itemize}
+  \item Environments sind unabhängige Puppet Umgebungen
+  \item Ein Master kann mehrere Environments zur Verfügung stellen
+  \end{itemize}
 
-\begin{frame}
-  \frametitle{Puppet run}
-  \begin{figure}[ht]
-    \centering
-      \includegraphics[height=6cm,width=11cm]{../pics/puppet_overview}
-    \label{fig:stack}
-  \end{figure}
+\begin{lstlisting}
+/etc/puppet/modules/...
+/etc/puppet/manifests/site.pp
+
+/etc/puppet/environments/linuxwochen/modules
+/etc/puppet/environments/linuxwochen/manifests/site.pp
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}
@@ -144,6 +150,53 @@ captionpos=b
 \end{frame}
 
 \begin{frame}
+  \frametitle{Puppet run}
+  \begin{figure}[ht]
+    \centering
+      \includegraphics[height=6cm,width=11cm]{../pics/puppet_overview}
+    \label{fig:stack}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Node classification}
+\begin{lstlisting}
+---
+classes:
+  addm:
+  aixcfg:
+  aixpython:
+  black:
+  hpasmcheck:
+  icinga:
+    autoupgrade: true
+    nagios_plugins_source: ''
+    nrpe_source: ''
+  isae3402:
+  puppetmgmt:
+    manage_config: true
+    puppetmaster: puppetd.eb.lan.at
+    puppet_version: 3.2.4
+  rpmsettings:
+  solarisadminfile:
+  sourcing:
+    menu_enabled: false
+  spacewalk::client:
+    activation_key: 1234
+    force_registration: false
+    spacewalk_fqdn: rhnsat2
+    use_spacewalk_client_repo: false
+  sudo:
+    config_dir: /etc/sudoers.d/
+    config_file: /etc/sudoers
+    config_file_replace: false
+    package: sudo
+    package_source: ''
+    purge: false
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}
   \center{\huge{Und jetzt?}}
 \end{frame}
 
@@ -154,7 +207,6 @@ captionpos=b
     \label{fig:stack}
   \end{figure}
 \end{frame}
-
 
 \begin{frame}
   \begin{itemize}
@@ -277,6 +329,17 @@ end
       \item Annotated Tags werden automatisch deployed (prod\_*)
       \end{itemize}
     \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Jenkins CI}
+
+  \begin{itemize}
+  \item Continuous Integration Server
+  \item Führt Jobs aus (z.b. Shell Scripts)
+  \item Monitored und liefert Status Jobs
+  \item Es können Abhängigkeiten zwischen Jobs definiert werden
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
