@@ -117,9 +117,30 @@ captionpos=b
           }
         }
       \end{lstlisting}
-  \item über einen External Node Classifier (Foreman)
   \item über Hiera (hiera\_include('classes',[````]))
+  \item über einen External Node Classifier (Foreman)
   \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Node classification}
+\begin{lstlisting}
+---
+classes:
+  black:
+  puppetmgmt:
+    manage_config: true
+    puppetmaster: puppetd
+    puppet_version: 3.2.4
+  sudo:
+    config_dir: /etc/sudoers.d/
+    config_file: /etc/sudoers
+    config_file_replace: false
+    package: sudo
+    package_source: ''
+    purge: false
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -156,44 +177,6 @@ captionpos=b
       \includegraphics[height=6cm,width=11cm]{../pics/puppet_overview}
     \label{fig:stack}
   \end{figure}
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Node classification}
-\begin{lstlisting}
----
-classes:
-  addm:
-  aixcfg:
-  aixpython:
-  black:
-  hpasmcheck:
-  icinga:
-    autoupgrade: true
-    nagios_plugins_source: ''
-    nrpe_source: ''
-  isae3402:
-  puppetmgmt:
-    manage_config: true
-    puppetmaster: puppetd.eb.lan.at
-    puppet_version: 3.2.4
-  rpmsettings:
-  solarisadminfile:
-  sourcing:
-    menu_enabled: false
-  spacewalk::client:
-    activation_key: 1234
-    force_registration: false
-    spacewalk_fqdn: rhnsat2
-    use_spacewalk_client_repo: false
-  sudo:
-    config_dir: /etc/sudoers.d/
-    config_file: /etc/sudoers
-    config_file_replace: false
-    package: sudo
-    package_source: ''
-    purge: false
-\end{lstlisting}
 \end{frame}
 
 \begin{frame}
