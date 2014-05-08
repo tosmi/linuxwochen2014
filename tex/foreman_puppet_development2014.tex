@@ -109,7 +109,7 @@ captionpos=b
   \frametitle{Zuordnung von Klassen}
 
   \begin{itemize}
-    \item über manifests/site.pp
+    \item über /etc/puppet/manifests/site.pp
       \begin{lstlisting}
         node /^(foo|bar)\.linuxwochen\.at$/ {
           class { 'linuxwochen2014':
@@ -391,8 +391,8 @@ end
 
   \begin{itemize}
   \item Ein GIT Repo funktioniert nicht bei Änderungen von Upstream Modulen
-  \item Andere Abteilungen sollen ihre Module unabhänging testen
-  \item Unittests sagen noch nichts aus wie sich der Code am Live-System verhält
+  \item Andere Abteilungen sollen ihre Module unabhängig testen
+  \item Unittests sagen noch nichts aus, wie sich der Code am Live-System verhält
   \item Wir sollten eigentlich das Zusammenspiel aller Module testen (Forge und eigene)
   \end{itemize}
 \end{frame}
