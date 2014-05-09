@@ -112,9 +112,7 @@ captionpos=b
     \item über /etc/puppet/manifests/site.pp
       \begin{lstlisting}
         node /^(foo|bar)\.linuxwochen\.at$/ {
-          class { 'linuxwochen2014':
-            ensure => absent
-          }
+          include linuxwochen2014
         }
       \end{lstlisting}
   \item über Hiera (hiera\_include('classes',[````]))
@@ -434,6 +432,8 @@ end
 
 \begin{frame}
   \huge{Danke für die Aufmerksamkeit}
+
+  \normalsize \url{http://stderr.at/foreman_puppet_development2014.pdf}
 \end{frame}
 \end{document}
 
